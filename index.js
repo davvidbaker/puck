@@ -14,8 +14,8 @@ const PIN_24 = 18;
 
 const grid = [[PIN_23, PIN_24]];
 
-grid.forEach((y) => {
-  y.forEach((x) => (pin) => {
+grid.forEach((_, y) => {
+  y.forEach((__, x) => {
     rpio.open(grid[y][x], rpio.OUTPUT, rpio.LOW);
   });
 });
@@ -52,19 +52,31 @@ while (1) {
     grid[light.y][light.x]
   );
 
-  grid.forEach((y) => {
-    console.log('🧨 y', y);
+  // for (let y = 0; y < NUM_ROWS; y++) {
+  //   if (light.y === y) {
+  //     for (let x = 0; x < NUM_COLS; x++) {
+  //       if (light.x === x) {
+  //         rpio.write(grid[y][x], rpio.HIGH);
+  //       }
+  //       console.log("🧨 x", x);
+  //       rpio.write(grid[y][x], rpio.LOW);
+  //     }
+  //   }
+  // }
+
+  grid.forEach((_, y) => {
+    console.log("🧨 y", y);
     if (light.y === y) {
-      y.forEach((x) => {
+      y.forEach((__, x) => {
         if (light.x === x) {
           rpio.write(grid[y][x], rpio.HIGH);
         }
-        console.log('🧨 x', x);
+        console.log("🧨 x", x);
         rpio.write(grid[y][x], rpio.LOW);
       });
     } else {
-      y.forEach((x) => {
-        console.log('🧨 xx', x);
+      y.forEach((__, x) => {
+        console.log("🧨 xx", x);
         rpio.write(grid[y][x], rpio.LOW);
       });
     }
