@@ -15,13 +15,18 @@ const PIN_24 = 18;
 const grid = [[PIN_23, PIN_24]];
 
 grid.forEach((_, y) => {
-  y.forEach((__, x) => {
-    rpio.open(grid[y][x], rpio.OUTPUT, rpio.LOW);
-  });
+  y.forEach((__, x) => {});
 });
 
 const NUM_COLS = grid[0].length;
 const NUM_ROWS = grid.length;
+
+for (let y = 0; y < NUM_ROWS; y++) {
+  for (let x = 0; x < NUM_COLS; x++) {
+    console.log("opening pin", grid[y][x]);
+    rpio.open(grid[y][x], rpio.OUTPUT, rpio.LOW);
+  }
+}
 
 function getLight() {
   // randomly pick a row and column
@@ -52,37 +57,21 @@ while (1) {
     grid[light.y][light.x]
   );
 
-  // for (let y = 0; y < NUM_ROWS; y++) {
-  //   if (light.y === y) {
-  //     for (let x = 0; x < NUM_COLS; x++) {
-  //       if (light.x === x) {
-  //         rpio.write(grid[y][x], rpio.HIGH);
-  //       }
-  //       console.log("🧨 x", x);
-  //       rpio.write(grid[y][x], rpio.LOW);
-  //     }
-  //   }
-  // }
-
-  grid.forEach((_, y) => {
-    console.log("🧨 y", y);
+  for (let y = 0; y < NUM_ROWS; y++) {
     if (light.y === y) {
-      y.forEach((__, x) => {
+      for (let x = 0; x < NUM_COLS; x++) {
         if (light.x === x) {
           rpio.write(grid[y][x], rpio.HIGH);
         }
         console.log("🧨 x", x);
         rpio.write(grid[y][x], rpio.LOW);
-      });
+      }
     } else {
-      y.forEach((__, x) => {
-        console.log("🧨 xx", x);
+      for (let x = 0; x < NUM_COLS; x++) {
         rpio.write(grid[y][x], rpio.LOW);
-      });
+      }
     }
-  });
-  /* On for 1 second */
-  // rpio.write(PIN_23, rpio.HIGH);
+  }
 
   const sleepFor = getTimeAtSpot();
   console.log("sleeping for", sleepFor);
