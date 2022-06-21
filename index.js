@@ -59,8 +59,9 @@ while (1) {
         if (light.x === x) {
           console.log("🧨 going high with x,y", x, y);
           rpio.write(grid[y][x], rpio.HIGH);
+        } else {
+          rpio.write(grid[y][x], rpio.LOW);
         }
-        rpio.write(grid[y][x], rpio.LOW);
       }
     } else {
       for (let x = 0; x < NUM_COLS; x++) {
