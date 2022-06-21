@@ -1,25 +1,68 @@
-var rpio = require('rpio');
+var rpio = require("rpio");
 
-console.log('hello world');
+// origin is top right square
+// PIN_23 is 0, 0 (row 0, column 0)
+// PIN_24 is 0, 1
 
 /*
  * Set the initial state to low.  The state is set prior to the pin becoming
  * active, so is safe for devices which require a stable setup.
  */
-rpio.open(16, rpio.OUTPUT, rpio.HIGH);
+console.log("Opening GPIO");
+const grid = [[PIN_23, PIN_24]];
+
+const PIN_23 = 16;
+const PIN_24 = 18;
+
+// const LED_ARRAY = [PIN_23, PIN_24];
+
+grid.flatMap((pin) => {
+  console.log("🧨 opening and ssetting pin to LOW", pin);
+  rpio.open(pin, rpio.OUTPUT, rpio.LOW);
+});
+
+const NUM_COLS = grid[0].length;
+const NUM_ROWS = grid.length;
+
+function getLight() {
+  // randomly pick a row and column
+  const x = Math.floor(Math.random() * NUM_COLS);
+  const y = Math.floor(Math.random() * NUM_ROWS);
+  return { x, y };
+}
+
+function getTimeAtSpot() {
+  // 2 to 5 seconds
+  return Math.random() * 3 + 2;
+}
 
 /*
  * The sleep functions block, but rarely in these simple programs does one care
  * about that.  Use a setInterval()/setTimeout() loop instead if it matters.
  */
-while(1) {
-        /* On for 1 second */
-console.log('high');
-        rpio.write(16, rpio.HIGH);
-        rpio.sleep(1);
 
-        /* Off for half a second (500ms) */
-console.log('low');
-        rpio.write(16, rpio.LOW);
-        rpio.msleep(500);
+let light = getLight();
+console.log("starting loop");
+while (1) {
+  light = getLight();
+
+  console.log("lighting up x,y", light.x, light.y);
+
+  grid.forEach((y) => {
+    if (light.y === y) {
+      y.forEach((x) => {
+        if (light.x === x) {
+          rpio.write(grid[y][x], rpio.HIGH);
+        }
+        rpio.write(grid[y][x], rpio.LOW);
+      });
+    } else {
+      y.forEach((x) => {
+        rpio.write(grid[y][x], rpio.LOW);
+      });
+    }
+  });
+  /* On for 1 second */
+  // rpio.write(PIN_23, rpio.HIGH);
+  rpio.sleep(getTimeAtSpot());
 }
