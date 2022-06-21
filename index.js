@@ -53,15 +53,18 @@ while (1) {
   );
 
   grid.forEach((y) => {
+    console.log('🧨 y', y);
     if (light.y === y) {
       y.forEach((x) => {
         if (light.x === x) {
           rpio.write(grid[y][x], rpio.HIGH);
         }
+        console.log('🧨 x', x);
         rpio.write(grid[y][x], rpio.LOW);
       });
     } else {
       y.forEach((x) => {
+        console.log('🧨 xx', x);
         rpio.write(grid[y][x], rpio.LOW);
       });
     }
