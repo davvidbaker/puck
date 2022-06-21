@@ -33,7 +33,7 @@ function getLight() {
 
 function getTimeAtSpot() {
   // 2 to 5 seconds
-  return Math.random() * 3 + 2;
+  return (Math.random() * 3 + 2) / 10;
 }
 
 /*
