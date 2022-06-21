@@ -68,5 +68,8 @@ while (1) {
   });
   /* On for 1 second */
   // rpio.write(PIN_23, rpio.HIGH);
-  rpio.sleep(getTimeAtSpot());
+
+  const sleepFor = getTimeAtSpot();
+  console.log("sleeping for", sleepFor);
+  rpio.sleep(sleepFor);
 }
