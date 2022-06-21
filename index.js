@@ -14,9 +14,10 @@ const PIN_24 = 18;
 
 const grid = [[PIN_23, PIN_24]];
 
-grid.flatMap((pin) => {
-  console.log("🧨 opening and ssetting pin to LOW", pin);
-  rpio.open(pin, rpio.OUTPUT, rpio.LOW);
+grid.forEach((y) => {
+  y.forEach((x) => (pin) => {
+    rpio.open(grid[y][x], rpio.OUTPUT, rpio.LOW);
+  });
 });
 
 const NUM_COLS = grid[0].length;
