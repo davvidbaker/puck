@@ -45,7 +45,12 @@ console.log("starting loop");
 while (1) {
   light = getLight();
 
-  console.log("lighting up x,y", light.x, light.y);
+  console.log(
+    "lighting up x,y | pin",
+    light.x,
+    light.y,
+    grid[light.y][light.x]
+  );
 
   grid.forEach((y) => {
     if (light.y === y) {
