@@ -33,7 +33,7 @@ function getLight() {
 
 function getTimeAtSpot() {
   // 2 to 5 seconds
-  return (Math.random() * 3 + 2);
+  return Math.random() * 3 + 2;
 }
 
 /*
@@ -57,9 +57,9 @@ while (1) {
     if (light.y === y) {
       for (let x = 0; x < NUM_COLS; x++) {
         if (light.x === x) {
+          console.log("🧨 going high with x,y", x, y);
           rpio.write(grid[y][x], rpio.HIGH);
         }
-        console.log("🧨 x", x);
         rpio.write(grid[y][x], rpio.LOW);
       }
     } else {
