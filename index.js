@@ -14,10 +14,6 @@ const PIN_24 = 18;
 
 const grid = [[PIN_23, PIN_24]];
 
-grid.forEach((_, y) => {
-  y.forEach((__, x) => {});
-});
-
 const NUM_COLS = grid[0].length;
 const NUM_ROWS = grid.length;
 
