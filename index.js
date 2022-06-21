@@ -9,12 +9,10 @@ var rpio = require("rpio");
  * active, so is safe for devices which require a stable setup.
  */
 console.log("Opening GPIO");
-const grid = [[PIN_23, PIN_24]];
-
 const PIN_23 = 16;
 const PIN_24 = 18;
 
-// const LED_ARRAY = [PIN_23, PIN_24];
+const grid = [[PIN_23, PIN_24]];
 
 grid.flatMap((pin) => {
   console.log("🧨 opening and ssetting pin to LOW", pin);
