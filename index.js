@@ -12,11 +12,11 @@ console.log("Opening GPIO");
 const PIN_23 = 16;
 const PIN_24 = 18;
 
-const PIN_16 = 36;
-const PIN_20 = 38;
-const PIN_21 = 40;
+const PIN_13 = 33;
+const PIN_19 = 35;
+const PIN_26 = 37;
 
-const grid = [[PIN_23, PIN_24, PIN_16, PIN_20, PIN_21]];
+const grid = [[PIN_23, PIN_24, PIN_13, PIN_19, PIN_26]];
 
 const NUM_COLS = grid[0].length;
 const NUM_ROWS = grid.length;
